@@ -1,0 +1,11 @@
+<litepal>
+    <dbname vaule="weather"/>
+
+    <version vaule="1"/>
+
+    <list>
+        <mapping class="com.lwxshawn.weather.db.Province"/>
+        <mapping class="com.lwxshawn.weather.db.City"/>
+        <mapping class="com.lwxshawn.weather.db.County"/>
+    </list>
+</litepal>
