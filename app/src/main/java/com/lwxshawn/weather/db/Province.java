@@ -1,10 +1,7 @@
 package com.lwxshawn.weather.db;
 
-import org.litepal.crud.DataSupport;
 
-/**
- * Created by WellXiang on 2017/5/3.
- */
+import org.litepal.crud.DataSupport;
 
 public class Province extends DataSupport {
 
