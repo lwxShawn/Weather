@@ -1,5 +1,6 @@
 package com.lwxshawn.weather;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.lwxshawn.weather.gson.Forecast;
 import com.lwxshawn.weather.gson.Weather;
+import com.lwxshawn.weather.service.AutoUpdateService;
 import com.lwxshawn.weather.util.HttpUtil;
 import com.lwxshawn.weather.util.Utility;
 
@@ -93,7 +95,6 @@ public class WeatherActivity extends AppCompatActivity {
         comfortText = (TextView) findViewById(R.id.comfort_text);
         carWashText = (TextView) findViewById(R.id.car_wash_text);
         sportText = (TextView) findViewById(R.id.spport_text);
-
         swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
         swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -167,6 +168,7 @@ public class WeatherActivity extends AppCompatActivity {
                             SharedPreferences.Editor editor = PreferenceManager
                                     .getDefaultSharedPreferences(WeatherActivity.this)
                                     .edit();
+                            editor.putString("weather", responseText);
                             editor.apply();
                             showWeatherInfo(weather);
                         }else{
@@ -218,6 +220,9 @@ public class WeatherActivity extends AppCompatActivity {
         carWashText.setText(carWash);
         sportText.setText(sport);
         weatherLayout.setVisibility(View.VISIBLE);
+
+        Intent intent = new Intent(this, AutoUpdateService.class);
+        startService(intent);
     }
 
     private void loadBingPic(){
